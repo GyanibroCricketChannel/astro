@@ -1,146 +1,68 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Astro Cricket</title>
-    
-    <!-- External Libraries -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@clappr/hlsjs-playback@1.0.1/dist/hlsjs-playback.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/clappr.level-selector/latest/level-selector.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/favicon.ico"/>
-    <link rel="shortcut icon" href="assets/favicon.ico"/>
 
-    <!-- Purple Theme Styles -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #e9d5f6; /* Light purple background */
-            font-family: Arial, sans-serif; /* Modern font */
-            color: #4a148c; /* Deep purple text */
-        }
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@WatchAddaLive</title>
+  <link rel="stylesheet" href="https://cxh.pages.dev/style.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+    }
 
-        #player-wrapper {
-            height: 100%;
-            width: 100%;
-            position: relative;
-            background-color: #6a1b9a; /* Purple background for the player */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-        }
+    #player {
+      width: 100%;
+      max-width: 100%;
+      height: 56.25vw;
+      max-height: 70vh;
+      position: relative;
+      top: 0;
+      left: 0;
+      border: none;
+    }
 
-        /* Watermark Styles */
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
-            color: #fff; /* White text */
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+    @media (max-width: 600px) {
+      #player {
+        height: 50vh;
+      }
+    }
 
-        .watermark a {
-            color: #fff;
-            text-decoration: none;
-        }
+    #telegramBtn {
+      display: block;
+      width: 90%;
+      margin: 20px auto;
+      padding: 15px;
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
-        .watermark a:hover {
-            text-decoration: underline;
-        }
-
-        /* Optional Watermark Animation */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        .watermark {
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        /* Watermark Mobile Responsive */
-        @media (max-width: 600px) {
-            .watermark {
-                font-size: 10px;
-                padding: 3px 6px;
-            }
-        }
-    </style>
-</head>
+    #telegramBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+<style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"></head>
 <body>
-    <!-- Player Container -->
-    <div id="player-wrapper"></div>
+  <iframe id="player" src="https://bgminorecoil.com/stream/dno/dno/embed.php?play=370" title="Live match video player" allowfullscreen=""></iframe>
 
-    <!-- Watermark Text -->
-  
+  <a id="telegramBtn" href="https://t.me/WatchAddaLive" target="_blank">Join Our Telegram Channel</a>
+  <script>var joinTelegram = confirm("Join For More Links!!");
+    if (joinTelegram) {
+        window.location.href = "https://t.me/WatchAddaLive";
+    }
 
-    <script>
-        var playerElement = document.getElementById("player-wrapper");
-    var player = new Clappr.Player({
-        source: 'stream.m3u8?id=370',
-        width: '100%',
-        height: '100%',
-        autoPlay: true, // Autoplay enabled
-        mute: false, // Start muted for autoplay compliance
-        preload: "auto", // Preload the video
-        plugins: [Clappr.HlsjsPlayback, Clappr.LevelSelector],
-        mimeType: "application/x-mpegURL",
-        mediacontrol: { seekbar: "#4a148c", buttons: "#4a148c" },
-        parentId: "#player-wrapper",
-        events: {
-            onReady: function() {
-                console.log("Player is ready");
-                // Attempt to unmute after playback starts
-                player.setVolume(100); 
-            },
-            onPlay: function() {
-                console.log("Player is playing");
-            },
-            onError: function() {
-                console.error("Player encountered an error. Retrying...");
-                reloadPlayer();
-            }
-        }
-    });
+    function welcome() {
+        window.open("https://t.me/WatchAddaLive");
+    }</script>
+<!-- Cloudflare Pages Analytics --><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;89ec3c1c820d4609b4a3643417d2cb06&quot;}"></script><!-- Cloudflare Pages Analytics -->
 
-    // Fallback for autoplay errors
-    player.on(Clappr.Events.PLAYER_ERROR, function() {
-        console.log("Autoplay failed. Adding manual play button.");
-        player.play(); // Attempt to play manually
-    });
-
-    // Function to reload player in case of persistent issues
-    function reloadPlayer() {
-        player.destroy(); // Destroy the current player instance
-        player = new Clappr.Player({
-            source: 'stream.m3u8?id=370',
-            width: '100%',
-            height: '100%',
-            autoPlay: true,
-            mute: false, // Ensure autoplay compliance
-            plugins: [Clappr.HlsjsPlayback, Clappr.LevelSelector],
-            mimeType: "application/x-mpegURL",
-            mediacontrol: { seekbar: "#4a148c", buttons: "#4a148c" },
-            parentId: "#player-wrapper"
-        });
-        }
-
-        // Reload the player every 10 minutes (600000 milliseconds)
-        setInterval(reloadPlayer, 600000); // 10 minutes
-    </script>
-</body>
-</html>
-<a href="javascript:document.location.reload();" onclick="window.open('https://t.me/+KK0MeTc1u9VlYmFl'); return false;" target="_blank">
-    <span style="position:absolute;z-index: 100; top:5px; left:5px; height:20px; width:100px; color:#ccc; border:2px solid #ccc;padding:1px 0;border-radius:2px; text-align:center">
-        <i class="fa fa-refresh"></i> Join US
-    </span>
-</a>
+</body></html>
